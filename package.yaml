@@ -1,0 +1,27 @@
+verbatim:
+  cabal-version: 2.2
+
+name: cs202-compiler
+version: 0.0.0.0
+
+ghc-options:
+  - -j
+  - -O0
+  - -threaded -rtsopts -with-rtsopts=-N
+
+dependencies:
+  - base
+  - pretty-simple
+  - process
+  - directory
+  - containers
+  - parsec >= 3.1.13
+
+library:
+  source-dirs: common
+
+executables:
+  a1-compiler:
+    main: Main.hs
+    source-dirs: a1
+    dependencies: cs202-compiler
