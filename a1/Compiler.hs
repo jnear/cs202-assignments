@@ -15,9 +15,9 @@ type Binding = (String, R0Expr)
 ------------------------------------------------------------
 
 data X86Arg = VarXE String
-            | DerefE String Integer
+            | DerefE String Int
             | RegE String
-            | IntXE Integer
+            | IntXE Int
   deriving (Eq, Ord, Show)
 
 data X86Instr = MovqE X86Arg X86Arg

@@ -47,7 +47,7 @@ prefixOp :: String -> (a -> a) -> Ex.Operator String () Identity a
 prefixOp s f = Ex.Prefix (reservedOp s >> return f)
 
 intLit :: Parser R0Expr
-intLit = Tok.integer lexer >>= return . IntE
+intLit = Tok.integer lexer >>= return . IntE . fromIntegral
 
 identifier :: Parser String
 identifier = Tok.identifier lexer

@@ -15,7 +15,7 @@ logOut :: String -> IO ()
 logOut s | logging   = putStrLn s
          | otherwise = return ()
 
-readInt :: String -> Integer
+readInt :: String -> Int
 readInt = read
 
 runTest :: String -> IO ()

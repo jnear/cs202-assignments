@@ -5,7 +5,7 @@ import System.Environment
 import AST
 import Parser hiding (main)
 
-eval :: R0Expr -> Integer
+eval :: R0Expr -> Int
 eval e = case e of
   IntE i -> i
   PlusE e1 e2 -> (eval e1) + (eval e2)
