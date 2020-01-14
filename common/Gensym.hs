@@ -25,3 +25,12 @@ readLine :: String
 readLine = unsafePerformIO $ do
   s <- getLine
   return s
+
+------------------------------------------------------------
+-- trace (don't look)
+------------------------------------------------------------
+trace :: String -> a -> a
+{-# NOINLINE trace #-}
+trace msg v = unsafePerformIO $ do
+  putStrLn msg
+  return v
