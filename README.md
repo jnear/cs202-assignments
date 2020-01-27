@@ -53,13 +53,27 @@ stack runghc Main.hs tests/test1.r0
 
 will produce the file `tests/test1.s`.
 
-To run the tests, navigate to the directory containing the compiler
-implementation and run `RunTests.hs`. For example:
+To run your compiled program, first use GCC to assemble it into a
+binary, then run the resulting binary (which will be called `a.out`):
+
+```
+gcc -g ../runtime.o tests/test1.s
+./a.out
+```
+
+The process above runs a single program and allows you to view its
+output.
+
+To run all of the tests, navigate to the directory containing the
+compiler implementation and run `RunTests.hs`. For example:
 
 ```
 cd a1/
 stack runghc RunTests.hs
 ```
+
+This process allows you to quickly verify that all of the test cases
+pass, but does not print out the output of each compiler pass.
 
 ## Assignment Submission
 
