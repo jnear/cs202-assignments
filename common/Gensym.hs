@@ -2,6 +2,7 @@ module Gensym where
 
 import Data.IORef
 import System.IO.Unsafe
+import System.Random
 
 ------------------------------------------------------------
 -- gensym (don't look)
@@ -34,3 +35,12 @@ trace :: String -> a -> a
 trace msg v = unsafePerformIO $ do
   putStrLn msg
   return v
+
+------------------------------------------------------------
+-- random (don't look)
+------------------------------------------------------------
+randInt :: (Int, Int) -> Int
+{-# NOINLINE randInt #-}
+randInt p = unsafePerformIO $ randomRIO p
+
+

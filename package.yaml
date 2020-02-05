@@ -17,6 +17,7 @@ dependencies:
   - directory
   - containers
   - parsec >= 3.1.13
+  - random
 
 library:
   source-dirs: common
