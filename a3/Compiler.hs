@@ -164,22 +164,32 @@ varsArg e = undefined
 -- Liveness analysis, for an instruction
 -- inputs:
 --   - e: an instruction
---   - prevLiveAfter: the set of live-after variables for the *next* instruction in the program
--- output: the set of live-after variables for the instruction e
+--   - prevLiveAfter: the set of live-after variables for *this* instruction (e)
+-- output: the set of live-after variables for the *previous* instruction in the program
 ulInstr :: X86Instr -> Set Variable -> Set Variable
-ulInstr e prevLiveAfter = undefined
+ulInstr e lAfter = undefined
+
+-- Liveness analysis, for multiple instructions
+-- input:  a list of instructions
+-- output: a list of live-after sets for each instruction in the program, plus one extra
+--  live-after set for the point before the first program instruction
+ulInstrs :: [X86Instr] -> [Set Variable]
+ulInstrs [] = [Set.empty]
+ulInstrs (i : is) =
+  let prevLafter : lAfters = ulInstrs is
+      nextLafter = ulInstr i prevLafter
+  in nextLafter : prevLafter : lAfters
 
 -- Liveness analysis, for a list of instructions
 -- input:  a list of instructions
 -- output: a list of pairs:
 --   1. an instruction
 --   2. the set of live-after variables for that instruction
+-- note: we throw out the first result from ulInstrs (it is not a live-after set for any instruction)
 uncoverLive :: [X86Instr] -> [(X86Instr, Set Variable)]
-uncoverLive [instr] = [(instr, ulInstr instr Set.empty)]
-uncoverLive (instr : ss) =
-  let (nInstr, s1) : s2s = uncoverLive ss
-      newLA = ulInstr instr s1
-  in ((instr, newLA) : (nInstr, s1) : s2s)
+uncoverLive instrs =
+  let (_ : lAfters) = ulInstrs instrs
+  in zip instrs lAfters
 
 ------------------------------------------------------------
 -- build-interference
