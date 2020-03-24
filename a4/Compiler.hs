@@ -210,7 +210,7 @@ ecAssign x e k cfg = undefined
 -- output: a C1 control flow graph
 explicateControl :: R2Expr -> C1CFG
 explicateControl e =
-  let cfg = emptyCFG
+  let cfg = emptyCFG ()
       b = ecTail e cfg
       _ = addCFGNode cfg "start" b
   in cfg

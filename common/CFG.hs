@@ -15,9 +15,9 @@ type CFG a = IORef (Map String a)
 instance Show a => Show (CFG a) where
   show = showCFG
 
-emptyCFG :: CFG a
+emptyCFG :: () -> CFG a
 {-# NOINLINE emptyCFG #-}
-emptyCFG = unsafePerformIO (newIORef Map.empty)
+emptyCFG _ = unsafePerformIO (newIORef Map.empty)
 
 addCFGNode :: CFG a -> String -> a -> ()
 {-# NOINLINE addCFGNode #-}
