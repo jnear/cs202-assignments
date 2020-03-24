@@ -16,9 +16,9 @@ dependencies:
   - process
   - directory
   - containers
+  - text
   - parsec >= 3.1.13
   - random
-  - text
 
 library:
   source-dirs: common
@@ -39,4 +39,8 @@ executables:
   a4-compiler:
     main: Main.hs
     source-dirs: a4
+    dependencies: cs202-compiler
+  a5-compiler:
+    main: Main.hs
+    source-dirs: a5
     dependencies: cs202-compiler
