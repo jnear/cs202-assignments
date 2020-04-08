@@ -44,3 +44,7 @@ executables:
     main: Main.hs
     source-dirs: a5
     dependencies: cs202-compiler
+  a6-compiler:
+    main: Main.hs
+    source-dirs: a6
+    dependencies: cs202-compiler
