@@ -1,0 +1,7 @@
+def times(n: Integer, m: Integer, a: Integer): Integer = {
+  if (n == 0)
+  then a
+  else times(n + -1, m, a + m)
+}
+
+times(30000, 2, 0)
