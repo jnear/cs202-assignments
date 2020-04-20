@@ -1,0 +1,9 @@
+def add(n, m) = {
+  n + m
+}
+
+def my_main() = {
+  add(40, 2)
+}
+
+my_main()

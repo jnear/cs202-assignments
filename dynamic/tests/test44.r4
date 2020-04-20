@@ -1,0 +1,11 @@
+def id(x) = {
+  x
+}
+
+def f(n, clos) = {
+  if n == 100
+  then (vectorRef(clos, 0))(vectorRef(vectorRef(clos, 1), 0))
+  else f(n + 1, vector(vectorRef(clos, 0), vectorRef(clos, 1)))
+}
+
+f(0, vector(id, vector(42)))

@@ -1,0 +1,22 @@
+def createVec() = {
+       let v1 = vector(1,2,3,4,5,6,7,8)
+  in   let v2 = vector(1,2,3,4,5,6,7,8)
+  in   let v3 = vector(1,2,3,4,5,6,7,8)
+  in   let v4 = vector(1,2,3,4,5,6,7,8)
+  in   let v5 = vector(1,2,3,4,5,6,7,8)
+  in   let v6 = vector(1,2,3,4,5,6,7,8)
+  in   let v7 = vector(1,2,3,4,5,6,7,8)
+  in   let v8 = vector(1,2,3,4,5,6,7,8)
+  in   let v9 = vector(1,2,3,4,5,6,7,8)
+  in   vector(42, vectorRef(v1, 1) +
+                  vectorRef(v2, 1) +
+                  vectorRef(v3, 1) +
+                  vectorRef(v4, 1) +
+                  vectorRef(v5, 1) +
+                  vectorRef(v6, 1) +
+                  vectorRef(v7, 1) +
+                  vectorRef(v8, 1) +
+                  vectorRef(v9, 1))
+}
+
+vectorRef(createVec(), 1)

@@ -1,0 +1,6 @@
+def add1(i: Integer): Integer = {
+  i + 1
+}
+
+let f = lambda (x: Integer) -> add1(x)
+in f(5)

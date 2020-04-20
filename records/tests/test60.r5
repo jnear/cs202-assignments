@@ -1,0 +1,7 @@
+record Point {
+  x: Integer,
+  y: Integer
+}
+
+let p = Point(2,3)
+in p.x + p.y

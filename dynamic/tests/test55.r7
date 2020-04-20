@@ -1,0 +1,5 @@
+def mkf(i) = {
+  lambda (x) -> i + x
+}
+
+(mkf(5))(6)

@@ -1,0 +1,11 @@
+def times(n, m) = {
+  if (n == 0)
+  then 0
+  else add(m, times(n + -1, m))
+}
+
+def add(n, m) = {
+  n + m
+}
+
+times(2, 3)

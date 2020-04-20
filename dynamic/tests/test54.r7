@@ -1,0 +1,6 @@
+def add1(i) = {
+  i + 1
+}
+
+let f = lambda (x) -> add1(x)
+in f(5)

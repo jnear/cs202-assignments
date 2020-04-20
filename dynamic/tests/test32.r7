@@ -1,0 +1,7 @@
+def times(n, m) = {
+  if (n == 0)
+  then 0
+  else m + times(n + -1, m)
+}
+
+times(2, 4)

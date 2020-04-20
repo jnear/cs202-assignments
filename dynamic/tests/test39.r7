@@ -1,0 +1,5 @@
+def addToVec() = {
+  vector(vector(42))
+}
+
+vectorRef(vectorRef(addToVec(), 0), 0)

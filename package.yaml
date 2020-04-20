@@ -52,3 +52,11 @@ executables:
     main: Main.hs
     source-dirs: a7
     dependencies: cs202-compiler
+  records-compiler:
+    main: Main.hs
+    source-dirs: records
+    dependencies: cs202-compiler
+  dynamic-compiler:
+    main: Main.hs
+    source-dirs: dynamic
+    dependencies: cs202-compiler

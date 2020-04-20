@@ -1,0 +1,9 @@
+def map(f, v) = {
+  vector(f(vectorRef(v, 0)), f(vectorRef(v, 1)))
+}
+
+def add1(x) = {
+  x + 1
+}
+
+vectorRef(map(add1, vector(0, 41)), 1)

@@ -1,0 +1,5 @@
+def cd(i) = {
+  if i == 0 then 0 else cd(i + -1)
+}
+
+cd(10)
