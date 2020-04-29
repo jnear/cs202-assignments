@@ -60,3 +60,11 @@ executables:
     main: Main.hs
     source-dirs: dynamic
     dependencies: cs202-compiler
+  objects-compiler:
+    main: Main.hs
+    source-dirs: objects
+    dependencies: cs202-compiler
+  lists-compiler:
+    main: Main.hs
+    source-dirs: lists
+    dependencies: cs202-compiler
