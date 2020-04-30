@@ -43,7 +43,7 @@ data R5Expr = IntE Int
             | GlobalValE String
             | FunCallE R5Expr [R5Expr]
             | LambdaE [(String, Type)] R5Expr
-            | NilE
+            | NilE Type
             | ConsE R5Expr R5Expr
             | CarE R5Expr
             | CdrE R5Expr
@@ -79,7 +79,7 @@ data TypedR5Expr = IntTE Int
                  | FunCallTE TypedR5Expr [TypedR5Expr] [Type] Type
                  | FunRefTE String Type
                  | LambdaTE [(String, Type)] Type TypedR5Expr
-                 | NilTE
+                 | NilTE Type
                  | ConsTE TypedR5Expr TypedR5Expr
                  | CarTE TypedR5Expr
                  | CdrTE TypedR5Expr

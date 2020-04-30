@@ -1,7 +1,7 @@
 def length(ls: List(Integer)): Integer = {
-  if ls == nil then 0
+  if ls == nil(Integer) then 0
   else 1 + length(cdr(ls))
 }
 
-let ls = cons(1, cons(2, cons(3, nil)))
+let ls = cons(1, cons(2, cons(3, nil(Integer))))
 in length(ls)

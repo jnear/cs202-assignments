@@ -195,11 +195,17 @@ consExpr = do
     return (a1, a2)
   return $ ConsE a1 a2
 
+nilExpr :: Parser R5Expr
+nilExpr = do
+  reserved "nil"
+  t <- parens pType
+  return $ NilE t
+
 factor :: Parser R5Expr
 factor =
       intExpr
   <|> voidExpr
-  <|> (reserved "nil" >> return NilE)
+  <|> nilExpr
   <|> carExpr
   <|> cdrExpr
   <|> consExpr
