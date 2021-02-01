@@ -63,7 +63,7 @@ containing the compiler implementation and run `compile.py`. For example:
 
 ```
 cd a1/
-python compile.py tests/test1.r0
+python compiler.py tests/test1.r0
 ```
 
 will produce the file `tests/test1.s`.
