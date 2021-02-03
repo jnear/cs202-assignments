@@ -9,6 +9,7 @@ setup(name='cs202_support',
       license='GPLv3',
       packages=['cs202_support'],
       install_requires=[
-          'lark-parser',
+            'lark-parser',
+            'pandas'
       ],
       zip_safe=False)
