@@ -1,6 +1,6 @@
 import os
 from compiler import run_compiler
-from parser import parse_rvar
+from r0_parser import parse_rvar
 from interpreter import eval_rvar
 from cs202_support import eval_x86
 

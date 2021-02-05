@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from collections import OrderedDict
 from typing import List, Set, Dict, Tuple
-from parser import *
+from r0_parser import *
 import sys
 
 from cs202_support.base_ast import AST, print_ast
