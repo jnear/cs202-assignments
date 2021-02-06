@@ -35,7 +35,7 @@ _r_var_parser = Lark(r"""
 ##################################################
 
 def _parse(s: str) -> R0Exp:
-    def bast(e):
+    def bast(e) -> R0Exp:
         if e.data == 'int_e':
             return Int(int(e.children[0]))
         else:
