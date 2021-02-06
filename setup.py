@@ -7,6 +7,7 @@ setup(name='cs202_support',
       author='Joe Near',
       author_email='jnear@uvm.edu',
       license='GPLv3',
+      package_data={'cs202_support': ['py.typed']},
       packages=['cs202_support'],
       install_requires=[
             'lark-parser',
