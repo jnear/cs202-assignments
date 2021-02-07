@@ -7,7 +7,7 @@ def eval_rvar(e: RVarExp) -> int:
         elif isinstance(e, Var):
             return env[e.var]
         elif isinstance(e, Let):
-            new_env = {e.x: eval_e(e.e1, env), **env}
+            new_env = {**env, e.x: eval_e(e.e1, env)}
             return eval_e(e.body, new_env)
         elif isinstance(e, Prim):
             if e.op == '+':
