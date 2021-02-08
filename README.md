@@ -66,13 +66,13 @@ cd a1/
 python compiler.py tests/test1.r0
 ```
 
-will produce the file `tests/test1.s`.
+will produce the file `tests/test1.r0.s`.
 
 To run your compiled program, first use GCC to assemble it into a
 binary, then run the resulting binary (which will be called `a.out`):
 
 ```
-gcc -g ../runtime.o tests/test1.s
+gcc -g ../runtime.o tests/test1.r0.s
 ./a.out
 ```
 
