@@ -62,7 +62,7 @@ def select_instructions(p: cvar.Program) -> x86.Program:
 # Pass #6: assign-homes
 ##################################################
 
-def assign_homes(program: x86.Program) -> (x86.Program, int):
+def assign_homes(program: x86.Program) -> Tuple[x86.Program, int]:
     # YOUR CODE HERE
     pass
 
@@ -71,7 +71,7 @@ def assign_homes(program: x86.Program) -> (x86.Program, int):
 # Pass #7: patch-instructions
 ##################################################
 
-def patch_instructions(inputs: (x86.Program, int)) -> (x86.Program, int):
+def patch_instructions(inputs: Tuple[x86.Program, int]) -> Tuple[x86.Program, int]:
     # YOUR CODE HERE
     pass
     
@@ -80,7 +80,7 @@ def patch_instructions(inputs: (x86.Program, int)) -> (x86.Program, int):
 # Pass #8: print-x86
 ##################################################
 
-def print_x86(inputs: (x86.Program, int)) -> str:
+def print_x86(inputs: Tuple[x86.Program, int]) -> str:
     # YOUR CODE HERE
     pass
 
