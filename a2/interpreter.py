@@ -13,6 +13,8 @@ def eval_rvar(e: RVarExp) -> int:
             if e.op == '+':
                 e1, e2 = e.args
                 return eval_e(e1, env) + eval_e(e2, env)
+            else:
+                raise Exception('eval_e', e)
         else:
             raise Exception('eval_e', e)
 
