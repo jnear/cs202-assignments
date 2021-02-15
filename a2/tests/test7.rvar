@@ -1,0 +1,3 @@
+let a = 42
+in let b = a
+in b

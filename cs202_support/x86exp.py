@@ -5,7 +5,7 @@
 # callq label | pushq arg | popq arg | retq | jmp label
 
 from dataclasses import dataclass
-from typing import List, Set, Dict, Tuple
+from typing import List, Set, Dict, Tuple, Any
 from .base_ast import AST
 
 # arg
@@ -24,6 +24,11 @@ class Reg(Arg):
 @dataclass
 class Var(Arg):
     var: str
+
+@dataclass
+class Deref(Arg):
+    offset: int
+    val: str
 
 # instr
 @dataclass
