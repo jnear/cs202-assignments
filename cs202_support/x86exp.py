@@ -9,71 +9,71 @@ from typing import List, Set, Dict, Tuple, Any
 from .base_ast import AST
 
 # arg
-@dataclass
+@dataclass(frozen=True, eq=True)
 class Arg(AST):
     pass
 
-@dataclass
+@dataclass(frozen=True, eq=True)
 class Int(Arg):
     val: int
 
-@dataclass
+@dataclass(frozen=True, eq=True)
 class Reg(Arg):
     val: str
 
-@dataclass
+@dataclass(frozen=True, eq=True)
 class Var(Arg):
     var: str
 
-@dataclass
+@dataclass(frozen=True, eq=True)
 class Deref(Arg):
     offset: int
     val: str
 
 # instr
-@dataclass
+@dataclass(frozen=True, eq=True)
 class Instr(AST):
     pass
 
-@dataclass
+@dataclass(frozen=True, eq=True)
 class Addq(Instr):
     e1: Arg
     e2: Arg
 
-@dataclass
+@dataclass(frozen=True, eq=True)
 class Subq(Instr):
     e1: Arg
     e2: Arg
 
-@dataclass
+@dataclass(frozen=True, eq=True)
 class Negq(Instr):
     e1: Arg
 
-@dataclass
+@dataclass(frozen=True, eq=True)
 class Movq(Instr):
     e1: Arg
     e2: Arg
 
-@dataclass
+@dataclass(frozen=True, eq=True)
 class Callq(Instr):
     label: str
 
-@dataclass
+@dataclass(frozen=True, eq=True)
 class Jmp(Instr):
     label: str
 
-@dataclass
+@dataclass(frozen=True, eq=True)
 class Pushq(Instr):
     e1: Arg
 
-@dataclass
+@dataclass(frozen=True, eq=True)
 class Popq(Instr):
     e1: Arg
 
-@dataclass
+@dataclass(frozen=True, eq=True)
 class Retq(Instr):
     pass
 
-@dataclass
+@dataclass(frozen=True, eq=True)
 class Program(AST):
     blocks: Dict[str, List[Instr]]
