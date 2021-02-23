@@ -19,12 +19,17 @@ def print_ast(obj, indent=0):
 
     elif isinstance(obj, list):
         if len(obj) == 0:
-            return '[]'
-        # elif len(obj) == 1:
-        #     return ' ' * indent + '[' + print_ast(obj[0], indent=0) + ']'
+            return ' ' * indent + '[]'
         else:
             children = ',\n'.join([print_ast(e, indent=indent+1) for e in obj])
             return ' ' * indent + '[\n' + children + '\n' + ' ' * indent + ']'
+
+    elif isinstance(obj, set):
+        if len(obj) == 0:
+            return ' ' * indent + '{}'
+        else:
+            children = ',\n'.join([print_ast(e, indent=indent+1) for e in obj])
+            return ' ' * indent + '{\n' + children + '\n' + ' ' * indent + '}'
 
     elif isinstance(obj, tuple):
         first, *rest = obj
@@ -42,8 +47,8 @@ def print_ast(obj, indent=0):
 
     elif isinstance(obj, (str, int)):
         return ' ' * indent + str(obj)
-        
+
     else:
-        raise Exception('Unsupported argument to print_ast:', type(obj), obj)
+        return str(obj)
 
 
