@@ -139,6 +139,10 @@ class InterferenceGraph:
             new_pairs = set((k, v) for v in self.graph[k])
             pairs = pairs.union(new_pairs)
 
+        for a, b in list(pairs):
+            if (b, a) in pairs:
+                pairs.remove((a, b))
+
         strings = [print_ast(a) + ' -- ' + print_ast(b) for a, b in pairs]
         return 'InterferenceGraph{\n ' + ',\n '.join(strings) + '\n}'
 
