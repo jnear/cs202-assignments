@@ -168,6 +168,11 @@ class X86Emulator:
                 v = self.eval_arg(a1)
                 self.store_arg(a2, v)
 
+            elif instr.data == 'movzbq':
+                a1, a2 = instr.children
+                v = self.eval_arg(a1)
+                self.store_arg(a2, v)
+
             elif instr.data == 'addq':
                 a1, a2 = instr.children
                 v1 = self.eval_arg(a1)
@@ -180,10 +185,49 @@ class X86Emulator:
                 v2 = self.eval_arg(a2)
                 self.store_arg(a2, v2 - v1)
 
-            elif instr.data == 'jmp':
+            elif instr.data == 'xorq':
+                a1, a2 = instr.children
+                v1 = self.eval_arg(a1)
+                v2 = self.eval_arg(a2)
+                self.store_arg(a2, v1 ^ v2)
+
+            elif instr.data in ['jmp', 'je', 'jl', 'jle', 'jg', 'jge']:
                 target = str(instr.children[0])
-                self.eval_instrs(blocks[target], blocks, output)
-                return # after jumping, toss continuation
+                perform_jump = False
+
+                if instr.data == 'jmp':
+                    perform_jump = True
+                elif instr.data == 'je' and self.registers['EFLAGS'] == 'e':
+                    perform_jump = True
+                elif instr.data == 'jl' and self.registers['EFLAGS'] == 'l':
+                    perform_jump = True
+                elif instr.data == 'jle' and self.registers['EFLAGS'] in ['l', 'e']:
+                    perform_jump = True
+                elif instr.data == 'jg' and self.registers['EFLAGS'] == 'g':
+                    perform_jump = True
+                elif instr.data == 'jge' and self.registers['EFLAGS'] in ['g', 'e']:
+                    perform_jump = True
+
+                if perform_jump:
+                    self.eval_instrs(blocks[target], blocks, output)
+                    return # after jumping, toss continuation
+
+            elif instr.data in ['sete', 'setl', 'setle', 'setg', 'setge']:
+                a1 = instr.children[0]
+
+                if instr.data == 'sete' and self.registers['EFLAGS'] == 'e':
+                    self.store_arg(a1, 1)
+                elif instr.data == 'setl' and self.registers['EFLAGS'] == 'l':
+                    self.store_arg(a1, 1)
+                elif instr.data == 'setle' and self.registers['EFLAGS'] in ['l', 'e']:
+                    self.store_arg(a1, 1)
+                elif instr.data == 'setg' and self.registers['EFLAGS'] == 'g':
+                    self.store_arg(a1, 1)
+                elif instr.data == 'setge' and self.registers['EFLAGS'] in ['g', 'e']:
+                    self.store_arg(a1, 1)
+                else:
+                    self.store_arg(a1, 0)
+
 
             elif instr.data == 'callq':
                 target = str(instr.children[0])
@@ -199,6 +243,21 @@ class X86Emulator:
 
             elif instr.data == 'retq':
                 return
+
+            elif instr.data == 'cmpq':
+                a1, a2 = instr.children
+                v1 = self.eval_arg(a1)
+                v2 = self.eval_arg(a2)
+
+                if v1 == v2:
+                    self.registers['EFLAGS'] = 'e'
+                elif v2 < v1:
+                    self.registers['EFLAGS'] = 'l'
+                elif v2 > v1:
+                    self.registers['EFLAGS'] = 'g'
+                else:
+                    raise RuntimeError(f'failed comparison: {instr}')
+
             else:
                 raise RuntimeError(f'Unknown instruction: {instr.data}')
 

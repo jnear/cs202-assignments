@@ -22,6 +22,10 @@ class Reg(Arg):
     val: str
 
 @dataclass(frozen=True, eq=True)
+class ByteReg(Arg):
+    val: str
+
+@dataclass(frozen=True, eq=True)
 class Var(Arg):
     var: str
 
@@ -55,12 +59,37 @@ class Movq(Instr):
     e2: Arg
 
 @dataclass(frozen=True, eq=True)
+class Cmpq(Instr):
+    e1: Arg
+    e2: Arg
+
+@dataclass(frozen=True, eq=True)
+class Xorq(Instr):
+    e1: Arg
+    e2: Arg
+
+@dataclass(frozen=True, eq=True)
+class Movzbq(Instr):
+    e1: Arg
+    e2: Arg
+
+@dataclass(frozen=True, eq=True)
 class Callq(Instr):
     label: str
 
 @dataclass(frozen=True, eq=True)
 class Jmp(Instr):
     label: str
+
+@dataclass(frozen=True, eq=True)
+class JmpIf(Instr):
+    cc: str
+    label: str
+
+@dataclass(frozen=True, eq=True)
+class Set(Instr):
+    cc: str
+    e1: Arg
 
 @dataclass(frozen=True, eq=True)
 class Pushq(Instr):
