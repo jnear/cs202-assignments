@@ -29,12 +29,12 @@ def eval_rif(e: RifExp):
         elif isinstance(e, Prim):
             if e.op in binops:
                 e1, e2 = e.args
-                f = binops[e.op]
-                return f(eval_e(e1, env), eval_e(e2, env))
+                f_bin = binops[e.op]
+                return f_bin(eval_e(e1, env), eval_e(e2, env))
             elif e.op in unops:
                 e1 = e.args[0]
-                f = unops[e.op]
-                return f(eval_e(e1, env))
+                f_un = unops[e.op]
+                return f_un(eval_e(e1, env))
             else:
                 raise Exception('eval_e: unknown primitive: ', e)
         elif isinstance(e, If):
