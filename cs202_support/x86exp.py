@@ -5,7 +5,7 @@
 # callq label | pushq arg | popq arg | retq | jmp label
 
 from dataclasses import dataclass
-from typing import List, Set, Dict, Tuple, Any
+from typing import List, Dict, Tuple, Any
 from .base_ast import AST
 
 # arg
