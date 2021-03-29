@@ -28,14 +28,17 @@ _r0_parser = Lark(r"""
 class RIntExp(AST):
     pass
 
+
 @dataclass
 class Int(RIntExp):
     val: int
+
 
 @dataclass
 class Plus(RIntExp):
     e1: RIntExp
     e2: RIntExp
+
 
 def parse(s):
     def bast(e):
@@ -48,6 +51,7 @@ def parse(s):
     parsed = _r0_parser.parse(s)
     ast = bast(parsed)
     return ast
+
 
 if __name__ == '__main__':
     e = Plus(Int(5), Int(6))

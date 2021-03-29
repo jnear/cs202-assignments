@@ -3,6 +3,7 @@ from .parser_x86 import x86_parser, x86_parser_instrs
 
 import pandas as pd
 
+
 class X86Emulator:
     def __init__(self, logging=True):
         self.registers = defaultdict(lambda: None)
@@ -91,7 +92,7 @@ class X86Emulator:
             if d_orig[k] != d_after[k]:
                 keys_diff.append(k)
         return keys_diff
-        
+
     def print_state(self):
         memory = [[ f'mem {k}', self.memory[k] ] for k in self.memory.keys() ]
         registers = [[ f'reg {k}', self.registers[k] ] for k in self.registers.keys() ]
@@ -115,7 +116,6 @@ class X86Emulator:
         else:
             raise Exception('eval_imm: unknown immediate:', e)
 
-    
     def eval_arg(self, a):
         if a.data == 'reg_a':
             return self.registers[str(a.children[0])]
@@ -150,7 +150,7 @@ class X86Emulator:
 
     def eval_instrs(self, instrs, blocks, output):
         for instr in instrs:
-            #log('Evaluating instruction:', instr.pretty())
+            # log('Evaluating instruction:', instr.pretty())
             if instr.data == 'pushq':
                 a = instr.children[0]
                 self.registers['rsp'] = self.registers['rsp'] - 8
@@ -228,7 +228,6 @@ class X86Emulator:
                 else:
                     self.store_arg(a1, 0)
 
-
             elif instr.data == 'callq':
                 target = str(instr.children[0])
                 if target == 'print_int':
@@ -236,8 +235,6 @@ class X86Emulator:
                     output.append(self.registers['rdi'])
                     if self.logging:
                         print(self.print_state())
-
-
                 else:
                     self.eval_instrs(blocks[target], blocks, output)
 
@@ -260,7 +257,6 @@ class X86Emulator:
 
             else:
                 raise RuntimeError(f'Unknown instruction: {instr.data}')
-
 
 
 prog1 = """
