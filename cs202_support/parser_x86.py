@@ -94,4 +94,3 @@ x86_parser_instrs = Lark(r"""
     %import common.WS
     %ignore WS
     """, start='instrs', parser='lalr')
-

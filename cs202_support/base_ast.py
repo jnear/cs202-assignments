@@ -1,5 +1,6 @@
 from dataclasses import dataclass, fields
 
+
 class AST:
     pass
 

@@ -1,4 +1,4 @@
-from compiler import *
+from compiler import Dict, RifExp, Int, Bool, Var, Let, Prim, If
 
 binops = {
     '+': lambda a, b: a + b,
@@ -14,6 +14,7 @@ binops = {
 unops = {
     'not': lambda a: not a
     }
+
 
 def eval_rif(e: RifExp):
     def eval_e(e: RifExp, env: Dict[str, int]):

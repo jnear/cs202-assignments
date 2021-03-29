@@ -8,21 +8,26 @@ from lark import Lark
 # Abstract Syntax Trees: Rif
 ##################################################
 
+
 @dataclass
 class RifExp(AST):
     pass
+
 
 @dataclass
 class Int(RifExp):
     val: int
 
+
 @dataclass
 class Bool(RifExp):
     val: bool
 
+
 @dataclass
 class Var(RifExp):
     var: str
+
 
 @dataclass
 class Let(RifExp):
@@ -30,10 +35,12 @@ class Let(RifExp):
     e1: RifExp
     body: RifExp
 
+
 @dataclass
 class Prim(RifExp):
     op: str
     args: List[RifExp]
+
 
 @dataclass
 class If(RifExp):
@@ -67,6 +74,7 @@ _r_var_parser = Lark(r"""
     %import common.WS
     %ignore WS
     """, start='exp', parser='lalr')
+
 
 ##################################################
 # Pass #0: Parsing Concrete to Abstract Syntax
@@ -103,6 +111,7 @@ def _parse(s: str) -> RifExp:
     parsed = _r_var_parser.parse(s)
     ast = bast(parsed)
     return ast
+
 
 def parse_rif(s):
     return _parse(s)
