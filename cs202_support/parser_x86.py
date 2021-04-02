@@ -32,13 +32,14 @@ x86_parser = Lark(r"""
         | "#" CNAME -> var_a
         | "(" "%" reg ")" -> direct_mem_a
         | atom "(" "%" reg ")" -> mem_a
+        | CNAME "(" "%" reg ")" -> global_val_a
 
     ?atom: NUMBER -> int_a
          | "-" atom  -> neg_a
 
     !?reg: "rsp" | "rbp" | "rax" | "rbx" | "rcx" | "rdx" | "rsi" | "rdi" 
          | "r8" | "r9" | "r10" | "r11" | "r12" | "r13" | "r14" | "r15"
-         | "al"
+         | "al" | "rip"
 
     prog: ".globl main" block*
 
@@ -81,12 +82,14 @@ x86_parser_instrs = Lark(r"""
         | "#" CNAME -> var_a
         | "(" "%" reg ")" -> direct_mem_a
         | atom "(" "%" reg ")" -> mem_a
+        | CNAME "(" "%" reg ")" -> global_val_a
 
     ?atom: NUMBER -> int_a
          | "-" atom  -> neg_a
 
     !?reg: "rsp" | "rbp" | "rax" | "rbx" | "rcx" | "rdx" | "rsi" | "rdi" 
          | "r8" | "r9" | "r10" | "r11" | "r12" | "r13" | "r14" | "r15"
+         | "al" | "rip"
 
     %import common.NUMBER
     %import common.CNAME

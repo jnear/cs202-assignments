@@ -3,6 +3,25 @@ from dataclasses import dataclass, fields
 class AST:
     pass
 
+class RType:
+    pass
+
+def print_type(obj, depth=0):
+    if depth > 5:
+        return '...'
+    elif isinstance(obj, RType):
+        name = type(obj).__name__
+        flds = [getattr(obj, f.name) for f in fields(obj)]
+        children = ', '.join([print_type(f_v, depth=depth+1) for f_v in flds])
+        if len(children) > 80:
+            return f'{name}(...)'
+        else:
+            return f'{name}({children})'
+    elif isinstance(obj, list):
+        return '[' + ', '.join([print_type(a) for a in obj]) + ']'
+    else:
+        return str(obj)
+
 
 def print_ast(obj, indent=0):
     if isinstance(obj, AST):
@@ -16,6 +35,10 @@ def print_ast(obj, indent=0):
         else:
             children = ',\n'.join([print_ast(f_v, indent=indent+1) for f_v in flds])
             return indentation + f'{name}(\n{children})'
+
+    elif isinstance(obj, RType):
+        indentation = ' ' * indent
+        return indentation + print_type(obj)
 
     elif isinstance(obj, list):
         if len(obj) == 0:

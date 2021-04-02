@@ -30,6 +30,14 @@ class Var(Arg):
     var: str
 
 @dataclass(frozen=True, eq=True)
+class VecVar(Var):
+    var: str
+
+@dataclass(frozen=True, eq=True)
+class GlobalVal(Arg):
+    val: str
+
+@dataclass(frozen=True, eq=True)
 class Deref(Arg):
     offset: int
     val: str

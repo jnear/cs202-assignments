@@ -11,6 +11,8 @@ class X86Emulator:
         self.logging = logging
         self.registers['rbp'] = 1000
         self.registers['rsp'] = 1000
+
+        self.global_vals = {}
     
     def log(self, s):
         if self.logging:
@@ -93,11 +95,13 @@ class X86Emulator:
         return keys_diff
         
     def print_state(self):
-        memory = [[ f'mem {k}', self.memory[k] ] for k in self.memory.keys() ]
+        pd.set_option("display.max_rows", None)
+        memory = [[ f'mem {k}', self.memory[k] ] for k in sorted(self.memory.keys()) ]
         registers = [[ f'reg {k}', self.registers[k] ] for k in self.registers.keys() ]
         variables = [[ f'var {k}', self.variables[k] ] for k in self.variables.keys() ]
+        gvals = [[ f'{k}', self.global_vals[k] ] for k in self.global_vals.keys() ]
 
-        all_state = memory + registers + variables
+        all_state = memory + registers + variables + gvals
 
         state_df = pd.DataFrame(all_state, columns=['Location', 'Value'])
 
@@ -128,8 +132,13 @@ class X86Emulator:
             addr = self.registers[reg]
             offset_addr = addr + self.eval_imm(offset)
             return self.memory[offset_addr]
+        elif a.data == 'global_val_a':
+            loc, reg = a.children
+            assert str(reg) == 'rip', a
+            return self.global_vals[str(loc)]
+
         else:
-            raise RuntimeError(f'Unknown arg: {a.data}')
+            raise RuntimeError(f'Unknown arg in eval_arg: {a}')
 
     def store_arg(self, a, v):
         if a.data == 'reg_a':
@@ -145,8 +154,13 @@ class X86Emulator:
             reg = a.children[0]
             addr = self.registers[reg]
             self.memory[addr] = v
+        elif a.data == 'global_val_a':
+            loc, reg = a.children
+            assert str(reg) == 'rip', a
+            self.global_vals[str(loc)] = v
+
         else:
-            raise RuntimeError(f'Unknown arg: {a.data}')
+            raise RuntimeError(f'Unknown arg in store_arg: {a}')
 
     def eval_instrs(self, instrs, blocks, output):
         for instr in instrs:
@@ -237,6 +251,47 @@ class X86Emulator:
                     if self.logging:
                         print(self.print_state())
 
+                elif target == 'initialize':
+                    self.log(f'CALL TO initialize: {self.registers["rdi"]}, {self.registers["rsi"]}')
+                    rootstack_size = self.registers['rdi']
+                    heap_size = self.registers['rsi']
+
+                    rs_begin = 2000
+                    rs_end = rs_begin + rootstack_size
+
+                    fromspace_begin = 100000
+                    fromspace_end = fromspace_begin + heap_size
+
+                    self.global_vals = {
+                        'rootstack_begin': rs_begin,
+                        'rootstack_end': rs_end,
+                        'free_ptr': fromspace_begin,
+                        'fromspace_begin': fromspace_begin,
+                        'fromspace_end': fromspace_end
+                    }
+
+                    if self.logging:
+                        print(self.print_state())
+
+
+                elif target == 'collect':
+                    self.log(f'CALL TO collect: need {self.registers["rsi"]} bytes')
+
+                    needed = self.registers["rsi"]
+                    fsb = self.global_vals['fromspace_begin']
+                    fse = self.global_vals['fromspace_end']
+
+                    current_space = fse - fsb
+
+                    new_space = current_space
+                    while new_space - current_space < needed:
+                        new_space = new_space * 2
+
+                    new_fse = fsb + new_space
+                    self.global_vals['fromspace_end'] = new_fse
+
+                    if self.logging:
+                        print(self.print_state())
 
                 else:
                     self.eval_instrs(blocks[target], blocks, output)
