@@ -1,0 +1,13 @@
+def times(n: Integer, m: Integer): Integer = {
+  if (n == 0)
+  then 0
+  else m + times(n + -1, m)
+}
+
+def fact(n: Integer): Integer = {
+  if (n == 0)
+  then 1
+  else times(n, (fact(n + -1)))
+}
+
+fact(5)

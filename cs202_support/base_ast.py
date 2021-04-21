@@ -22,16 +22,15 @@ def print_type(obj, depth=0):
     else:
         return str(obj)
 
-
 def print_ast(obj, indent=0):
     if isinstance(obj, AST):
         name = type(obj).__name__
         flds = [getattr(obj, f.name) for f in fields(obj)]
         indentation = ' ' * indent
 
-        test_children = ''.join([print_ast(f_v, indent=0) for f_v in flds])
-
-        if len(flds) <= 1 and '\n' not in test_children:
+        if len(flds) == 0:
+            return indentation + f'{name}()'
+        elif len(flds) == 1 and isinstance(flds[0], (str, int)):
             children = ''.join([print_ast(f_v, indent=0) for f_v in flds])
             return indentation + f'{name}({children})'
         else:

@@ -1,0 +1,49 @@
+def id(x: Integer): Integer = {
+  x
+}
+
+def addup(): Integer = {
+  let v1 = 25
+  in let v1 = 26
+  in let v2 = 26
+  in let v3 = 26
+  in let v4 = 26
+  in let v5 = 26
+  in let v6 = 26
+  in let v7 = 26
+  in let v8 = 26
+  in let v9 = 26
+  in let v10 = 26
+  in let v11 = 26
+  in let v12 = 26
+  in let v13 = 26
+  in let v14 = 26
+  in let v15 = 26
+  in let v16 = 26
+  in let v17 = 26
+  in let v18 = 26
+  in let v19 = 26
+  in let v20 = 26
+  in id(v1 +
+     v2 +
+     v3 +
+     v4 +
+     v5 +
+     v6 +
+     v7 +
+     v8 +
+     v9 +
+     v10 +
+     v11 +
+     v12 +
+     v13 +
+     v14 +
+     v15 +
+     v16 +
+     v17 +
+     v18 +
+     v19 +
+     v20)
+}
+
+addup()
