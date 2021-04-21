@@ -6,8 +6,10 @@ x86_parser = Lark(r"""
           | "subq" arg "," arg -> subq
           | "cmpq" arg "," arg -> cmpq
           | "xorq" arg "," arg -> xorq
+          | "leaq" arg "," arg -> leaq
           | "negq" arg -> negq
           | "jmp" CNAME -> jmp
+          | "jmp" "*" arg -> indirect_jmp
           | "je" CNAME -> je
           | "jl" CNAME -> jl
           | "jle" CNAME -> jle
@@ -21,11 +23,14 @@ x86_parser = Lark(r"""
           | "movzbq" arg "," arg -> movzbq
           | "xorq" arg "," arg -> xorq
           | "callq" CNAME -> callq
+          | "callq" "*" arg -> indirect_callq
           | "pushq" arg -> pushq
           | "popq" arg -> popq
           | "retq" -> retq
 
-    block: CNAME ":" (instr)*
+    block: ".globl" CNAME
+         |  ".align" NUMBER
+         | CNAME ":" (instr)*
 
     ?arg: "$" atom -> int_a
         | "%" reg -> reg_a
@@ -41,7 +46,7 @@ x86_parser = Lark(r"""
          | "r8" | "r9" | "r10" | "r11" | "r12" | "r13" | "r14" | "r15"
          | "al" | "rip"
 
-    prog: ".globl main" block*
+    prog: block*
 
     %import common.NUMBER
     %import common.CNAME
@@ -56,8 +61,10 @@ x86_parser_instrs = Lark(r"""
           | "subq" arg "," arg -> subq
           | "cmpq" arg "," arg -> cmpq
           | "xorq" arg "," arg -> xorq
+          | "leaq" arg "," arg -> leaq
           | "negq" arg -> negq
           | "jmp" CNAME -> jmp
+          | "jmp" "*" arg -> indirect_jmp
           | "je" CNAME -> je
           | "jl" CNAME -> jl
           | "jle" CNAME -> jle
@@ -71,6 +78,7 @@ x86_parser_instrs = Lark(r"""
           | "movzbq" arg "," arg -> movzbq
           | "xorq" arg "," arg -> xorq
           | "callq" CNAME -> callq
+          | "callq" "*" arg -> indirect_callq
           | "pushq" arg -> pushq
           | "popq" arg -> popq
           | "retq" -> retq

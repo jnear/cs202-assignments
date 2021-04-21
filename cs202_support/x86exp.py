@@ -38,6 +38,10 @@ class GlobalVal(Arg):
     val: str
 
 @dataclass(frozen=True, eq=True)
+class FunRef(Arg):
+    label: str
+
+@dataclass(frozen=True, eq=True)
 class Deref(Arg):
     offset: int
     val: str
@@ -82,8 +86,23 @@ class Movzbq(Instr):
     e2: Arg
 
 @dataclass(frozen=True, eq=True)
+class Leaq(Instr):
+    e1: Arg
+    e2: Arg
+
+@dataclass(frozen=True, eq=True)
 class Callq(Instr):
     label: str
+
+@dataclass(frozen=True, eq=True)
+class IndirectCallq(Instr):
+    e1: Arg
+    num_args: int
+
+@dataclass(frozen=True, eq=True)
+class TailJmp(Instr):
+    e1: Arg
+    num_args: int
 
 @dataclass(frozen=True, eq=True)
 class Jmp(Instr):

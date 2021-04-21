@@ -29,7 +29,9 @@ def print_ast(obj, indent=0):
         flds = [getattr(obj, f.name) for f in fields(obj)]
         indentation = ' ' * indent
 
-        if len(flds) <= 1:
+        test_children = ''.join([print_ast(f_v, indent=0) for f_v in flds])
+
+        if len(flds) <= 1 and '\n' not in test_children:
             children = ''.join([print_ast(f_v, indent=0) for f_v in flds])
             return indentation + f'{name}({children})'
         else:

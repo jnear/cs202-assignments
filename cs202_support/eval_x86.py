@@ -1,7 +1,13 @@
 from collections import defaultdict
+from dataclasses import dataclass
+
 from .parser_x86 import x86_parser, x86_parser_instrs
 
 import pandas as pd
+
+@dataclass
+class FunPointer:
+    fun_name: str
 
 class X86Emulator:
     def __init__(self, logging=True):
@@ -29,7 +35,9 @@ class X86Emulator:
         for b in p.children:
             assert b.data == 'block'
             block_name, *instrs = b.children
-            blocks[str(block_name)] = instrs
+            name = str(block_name)
+            blocks[name] = instrs
+            self.global_vals[name] = FunPointer(name)
 
         self.log('============================== STARTING EXECUTION ==============================')
     
@@ -205,6 +213,11 @@ class X86Emulator:
                 v2 = self.eval_arg(a2)
                 self.store_arg(a2, v1 ^ v2)
 
+            elif instr.data == 'negq':
+                a1 = instr.children[0]
+                v1 = self.eval_arg(a1)
+                self.store_arg(a1, (- v1))
+
             elif instr.data in ['jmp', 'je', 'jl', 'jle', 'jg', 'jge']:
                 target = str(instr.children[0])
                 perform_jump = False
@@ -262,7 +275,7 @@ class X86Emulator:
                     fromspace_begin = 100000
                     fromspace_end = fromspace_begin + heap_size
 
-                    self.global_vals = {
+                    self.global_vals = { **self.global_vals,
                         'rootstack_begin': rs_begin,
                         'rootstack_end': rs_end,
                         'free_ptr': fromspace_begin,
@@ -312,6 +325,25 @@ class X86Emulator:
                     self.registers['EFLAGS'] = 'g'
                 else:
                     raise RuntimeError(f'failed comparison: {instr}')
+
+            elif instr.data == 'leaq':
+                a1, a2 = instr.children
+                v1 = self.eval_arg(a1)
+                assert isinstance(v1, FunPointer)
+                self.store_arg(a2, v1)
+
+            elif instr.data == 'indirect_callq':
+                v = self.eval_arg(instr.children[0])
+                assert isinstance(v, FunPointer)
+                target = v.fun_name
+                self.eval_instrs(blocks[target], blocks, output)
+
+            elif instr.data == 'indirect_jmp':
+                v = self.eval_arg(instr.children[0])
+                assert isinstance(v, FunPointer)
+                target = v.fun_name
+                self.eval_instrs(blocks[target], blocks, output)
+                return # after jumping, toss continuation
 
             else:
                 raise RuntimeError(f'Unknown instruction: {instr.data}')
