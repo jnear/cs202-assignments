@@ -1,0 +1,14 @@
+record Point {
+  add: (Point, Point) -> Point,
+  x: Integer,
+  y: Integer
+}
+
+def addPoints(p1: Point, p2: Point): Point = {
+  Point(p1.x + p2.x, p1.y + p2.y)
+}
+
+let p1 = Point(addPoints, 2,3) in
+let p2 = Point(addPoints, 5,6) in
+let p3 = (p1.add)(p1, p2) in
+p3.x

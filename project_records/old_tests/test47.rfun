@@ -1,0 +1,9 @@
+def id(x: Integer): Integer = {
+  x
+}
+
+def f(clos: Vector((Integer) -> Integer, Vector(Integer))): Integer = {
+  (vectorRef(clos, 0))(vectorRef(vectorRef(clos, 1), 0))
+}
+
+f(vector(id, vector(42)))

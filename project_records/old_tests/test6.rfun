@@ -1,0 +1,7 @@
+
+let v = 1 in
+let w = 46 in
+let x = v + 7 in
+let y = x + 4 in
+let z = x + w in
+y + z

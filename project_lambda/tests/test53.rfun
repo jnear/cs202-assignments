@@ -1,0 +1,4 @@
+let x = 5
+in let f = lambda (y: Integer) -> x + y
+in let x = 6
+in f(10)
