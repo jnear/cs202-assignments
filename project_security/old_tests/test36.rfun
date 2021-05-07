@@ -1,0 +1,9 @@
+def add(n: Integer, m: Integer): Integer = {
+  n + m
+}
+
+def my_main(): Integer = {
+  add(40, 2)
+}
+
+my_main()

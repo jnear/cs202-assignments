@@ -1,0 +1,6 @@
+def add(n: Integer, m: Integer): Integer = {
+  n + m
+}
+
+let v = vector(add)
+in (vectorRef(v, 0))(5, 6)
