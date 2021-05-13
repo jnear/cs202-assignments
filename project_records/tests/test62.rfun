@@ -5,7 +5,7 @@ record Point {
 }
 
 def add1(p1: Point): Point = {
-  Point(p1.x + 1, p1.y + 1)
+  Point(p1.add1, p1.x + 1, p1.y + 1)
 }
 
 let p1 = Point(add1, 2, 3) in
