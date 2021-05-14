@@ -1,0 +1,11 @@
+
+def complete_triangle(degrees: BoundInt<180>): BoundInt<180> = {
+  BoundInt<180>(180) + (- degrees)
+}
+def complete_circle(degrees: BoundInt<360>): BoundInt<360> = {
+  BoundInt<360>(360) + (- degrees)
+}
+
+let x = complete_triangle(BoundInt<180>(135) ) in
+let y = complete_circle(BoundInt<360>(315) ) in
+x + y

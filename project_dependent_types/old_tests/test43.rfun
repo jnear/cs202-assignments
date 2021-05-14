@@ -1,0 +1,8 @@
+
+def f(n: Integer, v: Vector(Integer)): Integer = {
+  if n == 100
+  then vectorRef(v, 0)
+  else f(n + 1, vector(vectorRef(v, 0)))
+}
+
+f(0, vector(42))

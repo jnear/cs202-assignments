@@ -1,0 +1,3 @@
+let x = BoundInt<180>(100) in
+let y = BoundInt<180>(100) in
+x + y

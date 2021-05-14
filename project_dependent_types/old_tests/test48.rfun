@@ -1,0 +1,9 @@
+def add1(n: Integer): Integer = {
+  n + 1
+}
+
+def f(): (Integer) -> Integer = {
+  add1
+}
+
+f()(41)
