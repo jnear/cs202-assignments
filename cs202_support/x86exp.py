@@ -14,7 +14,7 @@ class Arg(AST):
     pass
 
 @dataclass(frozen=True, eq=True)
-class Int(Arg):
+class Immediate(Arg):
     val: int
 
 @dataclass(frozen=True, eq=True)
@@ -43,52 +43,18 @@ class FunRef(Arg):
 
 @dataclass(frozen=True, eq=True)
 class Deref(Arg):
+    reg: str
     offset: int
-    val: str
 
 # instr
 @dataclass(frozen=True, eq=True)
-class Instr(AST):
+class Instruction(AST):
     pass
 
 @dataclass(frozen=True, eq=True)
-class Addq(Instr):
-    e1: Arg
-    e2: Arg
-
-@dataclass(frozen=True, eq=True)
-class Subq(Instr):
-    e1: Arg
-    e2: Arg
-
-@dataclass(frozen=True, eq=True)
-class Negq(Instr):
-    e1: Arg
-
-@dataclass(frozen=True, eq=True)
-class Movq(Instr):
-    e1: Arg
-    e2: Arg
-
-@dataclass(frozen=True, eq=True)
-class Cmpq(Instr):
-    e1: Arg
-    e2: Arg
-
-@dataclass(frozen=True, eq=True)
-class Xorq(Instr):
-    e1: Arg
-    e2: Arg
-
-@dataclass(frozen=True, eq=True)
-class Movzbq(Instr):
-    e1: Arg
-    e2: Arg
-
-@dataclass(frozen=True, eq=True)
-class Leaq(Instr):
-    e1: Arg
-    e2: Arg
+class Instr(Instruction):
+    instr: str
+    args: List[Arg]
 
 @dataclass(frozen=True, eq=True)
 class Callq(Instr):
@@ -116,14 +82,6 @@ class JmpIf(Instr):
 @dataclass(frozen=True, eq=True)
 class Set(Instr):
     cc: str
-    e1: Arg
-
-@dataclass(frozen=True, eq=True)
-class Pushq(Instr):
-    e1: Arg
-
-@dataclass(frozen=True, eq=True)
-class Popq(Instr):
     e1: Arg
 
 @dataclass(frozen=True, eq=True)
