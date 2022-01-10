@@ -48,11 +48,11 @@ class Deref(Arg):
 
 # instr
 @dataclass(frozen=True, eq=True)
-class Instruction(AST):
+class Instr(AST):
     pass
 
 @dataclass(frozen=True, eq=True)
-class Instr(Instruction):
+class NamedInstr(Instr):
     instr: str
     args: List[Arg]
 
