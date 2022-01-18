@@ -91,6 +91,6 @@ def print_ast(obj, indent=0):
         return ' ' * indent + '"' + str(obj) + '"'
 
     else:
-        return str(obj)
+        return ' ' * indent + str(obj)
 
 
