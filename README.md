@@ -21,7 +21,7 @@ libraries. You can create the environment as follows:
 
 1. Open a terminal with Conda support. On Windows, launch "Anaconda
    Prompt"; on Linux or MacOS, launch a regular terminal.
-2. To create the environment, type: `conda -n cs202 python=3.10`
+2. To create the environment, type: `conda create -n cs202 python=3.10`
 3. To activate the environment, type `conda activate cs202`. The
    prompt's prefix should change from `(base)` to `(cs202)`.
 
