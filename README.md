@@ -141,3 +141,12 @@ you submit your assignment solution on Blackboard, you should upload
 *only* the `compiler.py` file. Please do not change any other files; I
 won't have access to changes you make to other files when grading your
 assignments.
+
+## Useful Tips
+
+To install the CS202 support code *inside* a Jupyter notebook, put the
+following code in a cell and run it:
+
+```
+!pip install git+https://github.com/jnear/cs202-assignments
+```
