@@ -150,3 +150,19 @@ following code in a cell and run it:
 ```
 !pip install git+https://github.com/jnear/cs202-assignments
 ```
+
+If you try to run `jupyter notebook` in your Conda environment, and
+get a command not found error, try:
+
+```
+pip install jupyter
+```
+
+If you try the above, and get a command not found error for `pip`,
+try:
+
+```
+conda install pip
+```
+
+and then try installing Jupyter again.
