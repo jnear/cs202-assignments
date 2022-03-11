@@ -207,6 +207,12 @@ class X86Emulator:
                 v2 = self.eval_arg(a2)
                 self.store_arg(a2, v2 - v1)
 
+            elif instr.data == 'mulq':
+                a1, a2 = instr.children
+                v1 = self.eval_arg(a1)
+                v2 = self.eval_arg(a2)
+                self.store_arg(a2, v2 * v1)
+
             elif instr.data == 'andq':
                 a1, a2 = instr.children
                 v1 = self.eval_arg(a1)
