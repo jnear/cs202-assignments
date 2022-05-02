@@ -24,8 +24,9 @@ class FunVal:
     body: List[stmt]
 
 def eval_Lif(prog: Module) -> List[int]:
+    outputs = []
+
     def eval_stmts(stmts: List[stmt], env: Dict[str, any]) -> List[any]:
-        outputs = []
         for stmt in stmts:
             match stmt:
                 case Return(e):
@@ -40,15 +41,14 @@ def eval_Lif(prog: Module) -> List[int]:
                     outputs.append(eval_e(e, env))
                 case If(condition, then_stmts, else_stmts):
                     if eval_e(condition, env):
-                        outputs += eval_stmts(then_stmts, env)
+                        return eval_stmts(then_stmts, env)
                     else:
-                        outputs += eval_stmts(else_stmts, env)
+                        return eval_stmts(else_stmts, env)
                 case While(test, body):
                     while eval_e(test, env):
-                        outputs += eval_stmts(body, env)
+                        eval_stmts(body, env)
                 case _:
                     raise Exception('eval_stmts', dump(stmt))
-        return outputs
         
     def eval_e(e: expr, env: Dict[str, any]) -> any:
         match e:
@@ -93,6 +93,7 @@ def eval_Lif(prog: Module) -> List[int]:
     env = {}
     match prog:
         case Module(stmts):
-            return eval_stmts(stmts, env)
+            eval_stmts(stmts, env)
+            return outputs
         case _:
             raise Exception('eval_Lif', prog)
