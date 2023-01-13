@@ -1,12 +1,9 @@
-from dataclasses import dataclass, fields
 import ast
-# from ast import *
+from .python_ast import *
 
-class AST:
-    pass
-
-class RType:
-    pass
+# ==================================================
+# Pretty printer (abstract syntax)
+# ==================================================
 
 def print_type(obj, depth=0):
     if depth > 5:
@@ -92,5 +89,3 @@ def print_ast(obj, indent=0):
 
     else:
         return ' ' * indent + str(obj)
-
-

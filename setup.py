@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='cs202_support',
-      version='0.2',
+      version='0.3',
       description='Support code for CS202: compiler construction',
       url='http://github.com/jnear/cs202-assignments',
       author='Joe Near',
