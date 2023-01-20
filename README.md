@@ -18,7 +18,7 @@ Homebrew is an open source package manager for MacOS. To install homebrew run th
 the command on their [website](https://brew.sh/)
 
 Once you have homebrew to installed, you can install any version of python using their CLI. In this case I am installing version 3.10 other 
-versions are also supported, you can find more information in the [python formulae](https://formulae.brew.sh/formula/python@3.10)
+versions are also supported, you can find more information in the [python formulae](https://docs.brew.sh/Homebrew-and-Python)
 
 ```bash
 brew install python@3.10
