@@ -41,12 +41,9 @@ libraries. You can create the environment as follows:
 
 You can install the support code for CS202 using `pip`:
 
-1. Clone this repository to your local computer
-2. Open a terminal with Conda support (as above)
-3. Activate the Conda env: `conda activate cs202`
-4. Install the code: `pip install .` (note that the dot is important:
-   and it tells `pip` to install the code found in the current
-   directory)
+1. Open a terminal with Conda support (as above)
+2. Activate the Conda env: `conda activate cs202`
+3. Install the code: `pip install git+https://github.com/jnear/cs202-assignments.git`
 
 ## Installing and Using PyCharm
 
