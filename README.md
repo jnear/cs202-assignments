@@ -58,7 +58,7 @@ You can set up PyCharm to work with your Conda environment as follows:
 1. Click the "open" button in PyCharm to open a project
 2. Select the directory where you checked out this repo (if you're
    asked to create a virtual env, click "cancel")
-3. Open Settings (File -> Settings)
+3. Open Settings (File -> Settings, or PyCharm -> Preferences on MacOS)
 4. Open the "Project: cs202-assignments" -> "Python Interpreter"
    section of the settings
 5. Click the settings gear icon next to the "Python Interpreter"
