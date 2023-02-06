@@ -146,6 +146,8 @@ configuration with `run_tests.py` as the target.
 This script will display the diffs of your compiler compared to the online compiler. By default it checks the prelude and conclusion pass but you can
 specify a pass the check. 
 
+You may need to pip install a few packages if any of the imports are unrecognized when running the script. Use `pip install [name of package]`.
+
 Run `python verify.py --help` for specific usage
 
 Verify all tests in the `a2/tests` dir with the `a2` compiler
