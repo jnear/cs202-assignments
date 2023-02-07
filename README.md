@@ -151,13 +151,19 @@ You may need to pip install a few packages if any of the imports are unrecognize
 Run `python verify.py --help` for specific usage
 
 Verify all tests in the `a2/tests` dir with the `a2` compiler
-`python verify.py a2/tests/ a2`
+```
+python verify.py a2/tests/ a2`
+```
 
 Verify the assign homes pass of the `a2/tests/test1.py` file with the `a2` compiler
-`python verify.py a2/tests/test1.py a2 -v ah`
+```
+python verify.py a2/tests/test1.py a2 -v ah
+```
 
 Verify all tests in the `a2/tests` dir with the `a2` online compiler and your local `a1` compiler
-`python verify.py a2/tests/ a2 -l a1`
+```
+python verify.py a2/tests/ a2 -l a1
+```
 
 Use the `-d` flag to show the strings that were extracted from both compilers. If the local compiler string is not an AST, there is probably an issue
 with your compiler. Run your compiler on a test case like `python compiler.py tests/test1.py` to determine what the error is.
