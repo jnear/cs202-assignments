@@ -1,7 +1,7 @@
 import argparse
 import os
 import requests
-from bs4 import BeautifulSoup
+import bs4
 import subprocess
 import difflib
 
@@ -26,7 +26,7 @@ def process_file(file_path, local, debug, comp_pass):
     print(f"Sent {file_path}: {response.status_code}")
     
     if response.status_code == 200:
-        soup = BeautifulSoup(response.text, "html.parser")
+        soup = bs4.BeautifulSoup(response.text, "html.parser")
         tag = soup.find("pre")
         if tag:
             string = tag.text
