@@ -201,3 +201,27 @@ conda install pip
 ```
 
 and then try installing Jupyter again.
+
+## FAQs on Completing Assignments
+
+#### What is the point of this pass? What is it trying to do?
+- Look at the relevant section in the textbook; the first sentence or paragraph describes the goal of the pass and often why it's needed
+- Look at the relevant section in the most recent exercise; the first note or first few questions often describes the point of the pass and its high level idea
+
+#### How do I get started on a pass?
+- Build the structure of the pass *without thinking*
+  - Look at the grammar for the input to the pass
+    - Create a nested function for each production rule (the left-hand side of ::=)
+    - Create a match statement inside each nested function
+    - Create a match case for each case of that production rule in the grammar (the right-hand side of ::=)
+  - Most exercise sections describing a pass will include a final question of the form "describe the pass in the compiler" whose answer gives an overview for the implementation strategy of the pass
+    - Copy and paste these instructions into your code as comments
+    - Follow the comments as you implement the function
+
+#### How do I fill in the implementation of the pass?
+- Fill in the structure by thinking
+  - Consult the textbook
+  - Consult the exercises and your notes
+  - Try an example in the online compiler
+  - Try an example on paper
+  - Re-do the relevant exercise questions
