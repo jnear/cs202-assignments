@@ -78,6 +78,11 @@ class Var(Expr):
     name: str
 
 @dataclass(frozen=True, eq=True)
+class Begin(Expr):
+    stmts: List[Stmt]
+    exp: Expr
+
+@dataclass(frozen=True, eq=True)
 class Call(Expr):
     function: Expr
     args: List[Expr]

@@ -57,6 +57,9 @@ def print_program(p):
                 return str(c)
             case Var(x):
                 return str(x)
+            case Begin(stmts, exp):
+                stmts_str = '; '.join([print_stmt(s) for s in stmts])
+                return f'begin({stmts_str}; {print_expr(exp)})'
             case Call(e1, args):
                 args_str = ', '.join([print_expr(a) for a in args])
                 return f'{print_expr(e1)}({args_str})'
