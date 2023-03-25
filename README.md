@@ -45,6 +45,13 @@ You can install the support code for CS202 using `pip`:
 2. Activate the Conda env: `conda activate cs202`
 3. Install the code: `pip install git+https://github.com/jnear/cs202-assignments.git`
 
+Alternatively, if you have cloned the repository on your computer:
+
+1. Open a terminal with Conda support (as above)
+2. Activate the Conda env: `conda activate cs202`
+3. Navigate to the `cs202-assignments` directory (e.g. using the `cd` command)
+4. Install the code: `pip install .`
+
 ## Installing and Using PyCharm
 
 I recommend using the PyCharm "community edition" to edit your
