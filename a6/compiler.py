@@ -46,6 +46,7 @@ def gensym(x):
 # typecheck
 ##################################################
 # op     ::= "add" | "sub" | "mult" | "not" | "or" | "and" | "eq" | "gt" | "gte" | "lt" | "lte"
+#          | "tuple" | "subscript"
 # Expr   ::= Var(x) | Constant(n) | Prim(op, List[Expr]) | Begin(Stmts, Expr)
 # Stmt   ::= Assign(x, Expr) | Print(Expr) | If(Expr, Stmts, Stmts) | While(Expr, Stmts)
 # Stmts  ::= List[Stmt]
@@ -68,6 +69,7 @@ def typecheck(program: Program) -> Program:
 # remove-complex-opera*
 ##################################################
 # op     ::= "add" | "sub" | "mult" | "not" | "or" | "and" | "eq" | "gt" | "gte" | "lt" | "lte"
+#          | "tuple" | "subscript"
 # Expr   ::= Var(x) | Constant(n) | Prim(op, List[Expr])
 # Stmt   ::= Assign(x, Expr) | Print(Expr) | If(Expr, Stmts, Stmts) | While(Expr, Stmts)
 # Stmts  ::= List[Stmt]
@@ -88,6 +90,7 @@ def rco(prog: Program) -> Program:
 # expose-allocation
 ##################################################
 # op     ::= "add" | "sub" | "mult" | "not" | "or" | "and" | "eq" | "gt" | "gte" | "lt" | "lte"
+#          | "tuple" | "subscript"
 # Expr   ::= Var(x) | Constant(n) | Prim(op, List[Expr])
 # Stmt   ::= Assign(x, Expr) | Print(Expr) | If(Expr, Stmts, Stmts) | While(Begin(Stmts, Expr), Stmts)
 # Stmts  ::= List[Stmt]
@@ -108,6 +111,7 @@ def expose_alloc(prog: Program) -> Program:
 # explicate-control
 ##################################################
 # op     ::= "add" | "sub" | "mult" | "not" | "or" | "and" | "eq" | "gt" | "gte" | "lt" | "lte"
+#          | "subscript" | "allocate" | "collect" | "tuple_set"
 # Atm    ::= Var(x) | Constant(n)
 # Expr   ::= Atm | Prim(op, List[Expr])
 # Stmt   ::= Assign(x, Expr) | Print(Expr) | If(Expr, Stmts, Stmts) | While(Begin(Stmts, Expr), Stmts)
@@ -128,6 +132,7 @@ def explicate_control(prog: Program) -> ctup.CProgram:
 # select-instructions
 ##################################################
 # op    ::= "add" | "sub" | "mult" | "not" | "or" | "and" | "eq" | "gt" | "gte" | "lt" | "lte"
+#         | "subscript" | "allocate" | "collect" | "tuple_set"
 # Atm   ::= Var(x) | Constant(n)
 # Expr  ::= Atm | Prim(op, List[Expr])
 # Stmt  ::= Assign(x, Expr) | Print(Expr)
