@@ -125,6 +125,8 @@ def print_x86(program: X86Program) -> str:
                 return f'{name} {arg_str}'
             case Callq(label):
                 return f'callq {label}'
+            case IndirectCallq(a1, _):
+                return f'callq *{print_arg(a1)}'
             case Retq():
                 return f'retq'
             case Jmp(label):
