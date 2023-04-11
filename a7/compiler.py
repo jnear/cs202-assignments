@@ -165,6 +165,7 @@ def explicate_control(prog: Program) -> cfun.CProgram:
 class X86FunctionDef(AST):
     label: str
     blocks: Dict[str, List[x86.Instr]]
+    stack_space: Tuple[int, int]
 
 @dataclass(frozen=True, eq=True)
 class X86ProgramDefs(AST):
