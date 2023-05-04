@@ -24,12 +24,27 @@ class FunVal:
     body: List[stmt]
     env: Dict[str, any]
 
+@dataclass
+class ObjectVal:
+    fields: Dict[str, any]
+
+@dataclass
+class Constructor:
+    fields: List[str]
+
 def eval_Lif(prog: Module) -> List[int]:
     outputs = []
 
     def eval_stmts(stmts: List[stmt], env: Dict[str, any]) -> List[any]:
         for stmt in stmts:
             match stmt:
+                case ClassDef(name, bases, keywords, body, decorator_list):
+                    fields = []
+                    for stmt in body:
+                        match stmt:
+                            case AnnAssign(Name(x), _):
+                                fields.append(x)
+                    env[name] = Constructor(fields)
                 case Return(e):
                     return eval_e(e, env)
                 case FunctionDef(name, args, body):
@@ -55,15 +70,24 @@ def eval_Lif(prog: Module) -> List[int]:
         
     def eval_e(e: expr, env: Dict[str, any]) -> any:
         match e:
+            case Attribute(obj, field):
+                obj_v = eval_e(obj, env)
+                return obj_v.fields[field]
             case Call(Name(fun_name), args):
                 fv = env[fun_name]
-                arg_vals = [eval_e(a, env) for a in args]
-                new_env = env.copy()
-                new_env.update(fv.env)
-                for a, v in zip(fv.args, arg_vals):
-                    new_env[a] = v
-                retval = eval_stmts(fv.body, new_env)
-                return retval
+                if isinstance(fv, Constructor):
+                    arg_vals = [eval_e(a, env) for a in args]
+                    return ObjectVal({x: v for x, v in zip(fv.fields, arg_vals)})
+                elif isinstance(fv, FunVal):
+                    arg_vals = [eval_e(a, env) for a in args]
+                    new_env = env.copy()
+                    new_env.update(fv.env)
+                    for a, v in zip(fv.args, arg_vals):
+                        new_env[a] = v
+                    retval = eval_stmts(fv.body, new_env)
+                    return retval
+                else:
+                    raise Exception('unknown function val:', fv)
 
             case Constant(i):
                 return i
